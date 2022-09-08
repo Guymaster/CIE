@@ -1,0 +1,33 @@
+#riveCanvas{
+    margin: auto;
+}
+
+.welcomeBox{
+    display: flex;
+    height: calc(100vh - 150px);
+    margin-bottom: 150px;
+    justify-content: center;
+}
+
+.welcomeTexte{
+    font-size: 60px;
+    margin: auto;
+    font-weight: bold;
+    width: 500px;
+    text-align: right;
+    color: rgba(112, 112, 112, 1);
+}
+
+.welcomeTexte > span{
+    color: #3098F2;
+}
+
+.partTitre{
+    color: #3098F2;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.partBox{
+    margin-bottom: 60px;
+}

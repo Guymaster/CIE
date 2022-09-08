@@ -1,0 +1,38 @@
+.profilContent{
+    display: flex;
+    justify-content: center;
+    margin: auto 30px;
+}
+
+.avatarBox{
+    height: calc(100vh - 100px);
+    width: 40%;
+}
+
+.infoBox{
+    height: calc(100vh - 140px);
+    width: calc(40% - 80px);
+    overflow: auto;
+    border: rgba(112, 112, 112, 0.5) solid 1px;
+    border-radius: 10px;
+    padding: 20px 40px;
+}
+
+.infoPart{
+    color: #3098F2;
+    font-size: 25px;
+    margin: 10px auto;
+}
+
+.infoRow{
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoTitre{
+    font-weight: bold;
+}
+
+.infoVal{
+    color: rgba(112, 112, 112, 1);
+}

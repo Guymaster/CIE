@@ -1,0 +1,230 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu';
+    color: #0D0D0D;
+  }
+
+main{
+    padding-top: 80px;
+}
+
+.test{
+    height: 1000px;
+}
+
+
+header{
+    transition: 0.3s;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    background-color: white;
+    box-shadow: none;
+}
+
+.deplace{
+    transition: 0.3s;
+    box-shadow: 0px 5px 20px rgba(112, 112, 112, 0.5);
+}
+
+#logo{
+    margin: auto 30px;
+    display: flex;
+}
+
+#logo > img{
+    height: 40px;
+    width: 40px;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 30px;
+}
+
+.compte{
+    display: flex;
+    justify-content: end;
+    width: 270px;
+    font-size: 20px;
+    margin-right: 30px;
+}
+
+.compteNom{
+    margin-right: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 140px;
+    font-size: 18px;
+    overflow: hidden;
+    color: #3098F2;
+}
+
+.compteNom:hover{
+    cursor: pointer;
+}
+
+.compteProfil{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    border: none;
+    margin-right: 0px;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: brown;
+}
+
+.compteProfil:hover{
+    cursor: pointer;
+}
+
+#typo{
+    margin: auto 7px;
+    font-size: 18px;
+}
+
+#e{
+    background-color: #3098F2;
+    color: white;
+    padding: 2px;
+}
+
+#admin{
+    color: #3098F2;
+}
+
+nav{
+    margin: auto;
+    font-size: 17px;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;
+}
+
+nav ul li{
+    margin: auto 10px;
+    padding: auto 10px;
+    color: #707070;
+}
+
+nav ul li:hover{
+    cursor: pointer;
+    color: #1C1C1C;
+}
+
+.navSelected{
+    color: #3098F2;
+}
+
+footer{
+    background-color: #3098F2;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px;
+}
+
+.footBox{
+    min-width: 25%;
+    margin: 0px 30px;
+}
+
+.footBoxTitre{
+    font-size: 18px;
+    color: white;
+}
+
+.drawer{
+    height: 40px;
+    width: 40px;
+    margin: auto 10px;
+    border: solid 2px #707070;
+    border-radius: 10%;
+    display: none;
+    margin-right: 0px;
+}
+
+.drawer svg{
+    height: 80%;
+    width: 80%;
+    margin: 10%;
+    fill: #707070;
+}
+
+.drawer:hover{
+    border: solid 2px #3098F2;
+    cursor: pointer;
+}
+
+.drawer:hover svg{
+    fill: #3098F2;
+}
+
+.miniBar{
+    background-color: white;
+    position: fixed;
+    right: 0px;
+    top: 60px;
+    z-index: 7;
+    width: 300px;
+    border: solid 1px rgba(112, 112, 112, 0.5);
+    border-top: none;
+    border-right: none;
+    display: none;
+}
+
+.miniBar ul{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+
+.miniBar ul li{
+    margin: 5px 0px;
+    padding: 5px 10px;
+    color: #707070;
+}
+
+.miniBar ul li:hover{
+    cursor: pointer;
+    color: #1C1C1C;
+    background-color: rgba(112, 112, 112, 0.5);
+}
+
+.miniBar .navSelected{
+    color: #3098F2;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 950px) {
+    header > nav{
+        display: none;
+    }
+    .drawer{
+        display: block;
+    }
+    .miniBarExtend{
+        display: block;
+    }
+}
+
+@media (max-width: 700px) {
+    header .compteNom{
+        display: none;
+    }
+    #typo{
+        display: none;
+    }
+    footer{
+        display: flex;
+        flex-direction: column;
+    }
+}
