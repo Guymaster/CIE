@@ -31,3 +31,10 @@
 .partBox{
     margin-bottom: 60px;
 }
+
+.partNom{
+    color: rgba(112, 112, 112, 1);
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}

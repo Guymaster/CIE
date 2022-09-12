@@ -20,14 +20,15 @@ function App() {
       <BrowserRouter>
         <Routes>
             <Route path='/' element={<DashPage/>}>
-              <Route path='inscription' element={<RegisterPage/>}/>
-              <Route path='connexion' element={<SignInPage/>}/>
-              <Route path='acceuil' element={<AcceuilDashOnglet/>}/>
+              <Route path='acceuil' default element={<AcceuilDashOnglet/>}/>
+              <Route path='' default element={<AcceuilDashOnglet/>}/>
               <Route path='ressources' element={<RessourcesOnglet/>}/>
               <Route path='propos' element={<ProposOnglet/>}/>
               <Route path='profil' element={<ProfilOnglet/>}/>
             </Route>
             <Route path='forum' element={<ForumPage/>}/>
+              <Route path='inscription' element={<RegisterPage/>}/>
+              <Route path='connexion' element={<SignInPage/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,4 +1,4 @@
-export default function SectionItem({nom, description, rivePath}){
+export default function SectionItem({nom, description, logo}){
     return (<>
         //SectionItem
     </>);

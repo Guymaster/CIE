@@ -31,7 +31,7 @@ function DashPage(){
                 </div>
                 <nav>
                     <ul>
-                        <li className="navLink navSelected" onClick={()=>{VersTab('/acceuil')}} id="acceuilLink">Acceuil</li>
+                        <li className="navLink" onClick={()=>{VersTab('/acceuil')}} id="acceuilLink">Acceuil</li>
                         <li className="navLink" onClick={()=>{VersTab('/ressources')}} id="ressourcesLink">Ressources</li>
                         <li className="navLink" onClick={()=>{VersTab('/propos')}} id="proposLink">A Propos</li>
                         <li className="navLink" onClick={()=>{VersTab('/forum')}}>Forum</li>

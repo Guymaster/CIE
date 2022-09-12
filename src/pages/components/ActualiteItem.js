@@ -1,4 +1,4 @@
-export default function ActualiteItem({texte, droite, lienImage}){
+export default function ActualiteItem({texte, droite, lienImage, date}){
     return (<>
         <div>
         //ActualiteItem
