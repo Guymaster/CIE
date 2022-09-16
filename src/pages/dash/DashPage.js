@@ -5,16 +5,21 @@ import ParamsOnglet from "./onglets/ParamsOnglet";
 import ProfilOnglet from "./onglets/ProfilOnglet";
 import ProposOnglet from "./onglets/ProposIOnglet";
 import RessourcesOnglet from "./onglets/RessourcesOnglet";
+import { identiconSvg } from '../../utils/avatar.js';
 import {BrowserRouter as Router, Routes, Route, Link, Outlet} from 'react-router-dom';
 import '../../styles/DashPage.css';
 import logoImg from '../../assets/logoClubInfo.svg';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { desQueArrive } from "../../firebase/operations";
+import { useState } from "react";
 
 function DashPage(){
-    document.addEventListener('scroll', (ev)=>{onScroll(window.pageYOffset)})
+    const [user, setUser] = useState({});
     useEffect(()=>{
+        document.addEventListener('scroll', (ev)=>{onScroll(window.pageYOffset)})
         addListeners();
+        desQueArrive((userObj)=>{setUser(userObj)});
     }, []);
     const navigate = useNavigate();
     function VersTab(tab){
@@ -38,8 +43,8 @@ function DashPage(){
                     </ul>
                 </nav>
                 <div className='compte'>
-                    <div className='compteNom'>@Guymaster</div>
-                    <img className='compteProfil'/>
+                    <div className='compteNom' onClick={()=>{navigate('/')}}>@{user.pseudo}</div>
+                    <identicon-svg username={user.pseudo} className='compteProfil' onClick={()=>{navigate('/')}}></identicon-svg>
                     <div className="drawer" id="drawerBTN">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
                     </div>

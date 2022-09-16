@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@editorjs/editorjs": "^2.25.0",
     "@rive-app/canvas": "^1.0.84",
     "@rive-app/webgl": "^1.0.80",
     "@testing-library/jest-dom": "^5.16.3",
@@ -10,9 +11,9 @@
     "@testing-library/user-event": "^13.5.0",
     "avataaars": "^2.0.0",
     "crypto": "^1.0.1",
-    "firebase": "^9.8.2",
+    "firebase": "^9.9.4",
     "mongodb": "^4.7.0",
-    "mongoose": "^6.3.6",
+    "mongoose": "^6.6.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.2.2",
@@ -42,5 +43,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@editorjs/code": "^2.7.0",
+    "@editorjs/link": "^2.4.1",
+    "@editorjs/simple-image": "^1.4.1"
   }
 }

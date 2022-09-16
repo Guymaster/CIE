@@ -1,11 +1,17 @@
 import '../../../styles/ProfilOnglet.css';
 import { identiconSvg } from '../../../utils/avatar.js';
 import {useState} from 'react';
+import { desQueArrive } from '../../../firebase/operations';
+import { useEffect } from 'react';
 
 function ProfilOnglet(){
     const [modif, setModif] = useState(false);
     const [modifPassword, setModifPassword] = useState(false);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
+    const [viewedUser, setViewedUser] = useState({});
+    useEffect(()=>{
+        desQueArrive((userObj)=>{setUser(userObj)});
+    }, []);
 
     return (
         <>
@@ -20,7 +26,7 @@ function ProfilOnglet(){
             <div className='profilContent'>
                 <div className="avatarBox">
                     <div>
-                        <identicon-svg username="Guymaster"></identicon-svg>
+                        <identicon-svg username={user.pseudo} className='compteProfil'></identicon-svg>
                     </div>
                 </div>
                 <div className="infoBox">
@@ -30,9 +36,9 @@ function ProfilOnglet(){
                             <div className='infoTitre'>Nom Complet</div>
                             {
                                 (modif)?
-                                <input type='texte' className='infoVal'/>
+                                <input type='texte' className='infoVal' placeholder={user.nomComplet}/>
                                 :
-                                <><div>A</div></>
+                                <><div> {user.nomComplet} </div></>
                             }
                         </div>
                         <div className='infoRow'>
@@ -41,7 +47,7 @@ function ProfilOnglet(){
                                 (modif)?
                                 <input type='texte' className='infoVal'/>
                                 :
-                                <><div>A</div></>
+                                <><div> {user.pseudo} </div></>
                             }
                         </div>
                         <div className='infoRow'>
@@ -50,7 +56,7 @@ function ProfilOnglet(){
                                 (modif)?
                                 <input type='texte' className='infoVal'/>
                                 :
-                                <><div>A</div></>
+                                <><div> {user.type} </div></>
                             }
                         </div>
                         <div className='infoRow'>
@@ -59,7 +65,25 @@ function ProfilOnglet(){
                                 (modif)?
                                 <input type='texte' className='infoVal'/>
                                 :
-                                <><div>A</div></>
+                                <><div> {(user.section)?user.section:'Aucune'} </div></>
+                            }
+                        </div>
+                        <div className='infoRow'>
+                            <div className='infoTitre'>Téléphone</div>
+                            {
+                                (modif)?
+                                <input type='texte' className='infoVal' placeholder={user.telephone}/>
+                                :
+                                <><div> {user.telephone} </div></>
+                            }
+                        </div>
+                        <div className='infoRow'>
+                            <div className='infoTitre'>Description</div>
+                            {
+                                (modif)?
+                                <textarea className='infoVal'> {user.description} </textarea>
+                                :
+                                <><div> {user.description} </div></>
                             }
                         </div>
                         <div className='deconnBTN' onClick={()=>{if(modifPassword){setModifPassword(false);}else{setModifPassword(true);}}}>

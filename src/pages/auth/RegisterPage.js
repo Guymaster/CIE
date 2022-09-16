@@ -2,11 +2,35 @@ import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import '../../styles/RegisterPage.css';
 import '../../datas/firebase.js';
 import {useState} from 'react';
+import {inscription} from '../../firebase/operations.js';
+import { useNavigate } from 'react-router-dom';
 
 function RegisterPage(){
+    const Navigate = useNavigate();
     const [esaticien, setEsaticien] = useState(false);
     function tenterInscription(){
-        console.log('on tente?')
+        let nomComplet = document.getElementById('nomComplet').value;
+        let pseudo = document.getElementById('pseudo').value;
+        let tel = document.getElementById('tel').value;
+        let email = document.getElementById('email').value;
+        let desc = document.getElementById('desc').value;
+        let mdp = document.getElementById('mdp').value;
+        let cmdp = document.getElementById('cmdp').value;
+        let errBox = document.getElementById('errBox');
+        let matricule = document.getElementById('matricule').value;
+        if(cmdp!=mdp){
+            errBox.innerText = 'Les 2 Mots de Passe doivent être égaux'
+        }
+        else{
+            inscription(email, mdp, (esaticien?matricule:null), nomComplet, pseudo, tel, desc).then((rep)=>{
+                if(rep.success){
+                    Navigate('/connexion');
+                }
+                else{
+                    errBox.innerText = rep.error;
+                }
+            });
+        }
     }
     return (
         <>  
@@ -42,8 +66,7 @@ function RegisterPage(){
                 <label htmlFor='cmdp'>Confirmer Mot de Passe</label>
                 <input type='password' id='cmdp'/>
                 <button id='validBTN' onClick={(ev)=>{ev.preventDefault(); tenterInscription();}}>Valider</button>
-                <div className='errBox'>
-                    jnnqnvq qv vnq vqnvqnv qn vj 
+                <div className='errBox' id='errBox'>
                 </div>
             </form>
         </>

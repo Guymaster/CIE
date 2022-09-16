@@ -1,7 +1,7 @@
 function NouvQuestOnglet(){
     return (
         <div>
-            NouvQuestOnglet
+            //NouvQuestOnglet
         </div>
     );
 }

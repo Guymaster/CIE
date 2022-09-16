@@ -1,0 +1,254 @@
+.forumMain{
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+}
+
+.forumMenuBox{
+    height: 100vh;
+    width: 300px;
+    position: fixed;
+    background-color: white;
+}
+
+.forumSearchBox{
+    border-left: solid 1px rgba(112, 112, 112, 0.5);
+    width: calc(100vw - 300px);
+    padding-bottom: 50px;
+    margin-left: 300px;
+}
+
+.forumBanner{
+    width: 100%;
+}
+
+.forumTitre{
+    font-size: 25px;
+    margin: 25px auto;
+    font-weight: bold;
+}
+
+.forumTabLink{
+    margin: 15px auto;
+    font-size: 20px;
+    color: rgba(112, 112, 112, 1);
+}
+
+.forumTabLink:hover{
+    cursor: pointer;
+    color: #3098F2;
+}
+
+.forumTabLink:hover span{
+    color: #3098F2;
+}
+
+.forumTabLink svg{
+    fill: rgba(112, 112, 112, 1);
+    height: 30px;
+    display: none;
+    margin: auto;
+}
+
+.forumTabLink:hover svg{
+    fill: #3098F2;
+}
+
+.formMenuSelected svg{
+    fill: #3098F2;
+}
+
+.formMenuSelected span{
+    color: #3098F2;
+}
+
+.searchTopicInput{
+    margin-top: 20px;
+    font-size: 20px;
+    padding: 10px 25px;
+    outline: none;
+    border-radius: 40px;
+    border: solid 2px rgba(112, 112, 112, 0.5);
+}
+
+.searchTopicInput:focus{
+    border: solid 2px #3098F2;
+}
+
+.sectionName{
+    border: solid 1px #3098F2;
+    display: inline-block;
+    margin: 7px;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+.sectionName:hover{
+    cursor: pointer;
+    background-color: #3098F2;
+    transition: 0.3s;
+}
+
+.sectionNameSelected{
+    background-color: #3098F2;
+}
+
+.sectionBox{
+    margin-top: 30px;
+}
+
+.newQuestBTN{
+    background-color: #3098F2;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
+}
+
+.forumPlusBTN svg{
+    fill: white;
+    height: 40px;
+    display: block;
+    margin: auto;
+}
+
+.questionBox{
+    padding: 30px;
+}
+
+.forumPlusBTN{
+    background-color: #3098F2;
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 30px auto;
+}
+
+.forumPlusBTN:hover{
+    opacity: 0.7;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .forumTabLink svg{
+        display: block;
+    }
+    .forumTabLink span{
+        display: none;
+    }
+    .forumMenuBox{
+        width: 70px;
+    }
+    .forumTitre{
+        font-size: 18px;
+    }
+    .forumSearchBox{
+        border-left: solid 1px rgba(112, 112, 112, 0.5);
+        width: calc(100vw - 75px);
+        margin-left: 70px;
+    }
+}
+
+.addQuestBox{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 15;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.addQuestContent{
+    background-color: white;
+    width: 500px;
+    padding: 20px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#addQuestDesc{
+    border: solid 1px rgba(112, 112, 112, 0.5);
+    text-align: start;
+    padding: 10px;
+}
+
+.addQuestContent::-webkit-scrollbar{
+    display: none;
+}
+
+.addQuestContent input, .addQuestContent select{
+    padding: 10px;
+    outline: none;
+    border: solid 1px rgba(112, 112, 112, 0.5);
+}
+
+#addQuitSvg{
+    height: 20px;
+    width: 20px;
+    margin-right: 20px;
+}
+
+.addQuestBoxTitre{
+    color: #3098F2;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: start;
+    margin-bottom: 20px;
+}
+
+.addQuestContent label{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+#addQuitSvg:hover{
+    fill: #3098F2;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.addQuestBoxActive{
+    display: flex;
+}
+
+.addBoxConfirmBTN{
+    background-color: #3098F2;
+    width: 100px;
+    padding: 10px 30px;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    margin: 30px;
+}
+
+.addBoxCancelBTN{
+    background-color: rgb(243, 45, 45);
+    width: 100px;
+    padding: 10px 30px;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    margin: 30px;
+}
+
+.addBoxCancelBTN:hover, .addBoxConfirmBTN:hover{
+    cursor: pointer;
+    transition: 0.3s;
+    opacity: 0.7;
+}
+
+.addConfirmRow{
+    display: flex;
+    justify-content: space-between;
+}

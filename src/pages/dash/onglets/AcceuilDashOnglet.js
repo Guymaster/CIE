@@ -9,13 +9,44 @@ var riveCanvas;
 
 function AcceuilDashOnglet(){
     const [actualites, setActualites] = useState([
-        {texte: 'Blabla bla bla', image: '#', date: '25/02/2022'},
-        {texte: 'Blabla bla bla', image: '#', date: '26/02/2023'}
+        {id: '1', texte: 'Blabla bla bla', image: '#', date: '25/02/2022'},
+        {id: '2', texte: 'Blabla bla bla', image: '#', date: '26/02/2023'}
     ]);
     const sections = [
         {
-            nom: 'Dévéloppement Mobile',
-            description: "J'ai pas Inspi",
+            id: 'MOBILE',
+            nom: 'DEVELOPPEMENT MOBILE',
+            description: "Le développement d'applications mobiles est l'acte ou le processus par lequel une application mobile est développée pour les appareils mobiles, tels que les assistants numériques personnels, les assistants numériques d'entreprise ou les téléphones mobiles",
+            logo: '#'
+        },
+        {
+            id: 'WEB',
+            nom: 'DEVELOPPEMENT WEB',
+            description: "Le World Wide Web, la toile mondiale ou la toile, est un système hypertexte public fonctionnant sur Internet. Le Web permet de consulter, avec un navigateur, des pages accessibles sur des sites. L’image de la toile d’araignée vient des hyperliens qui lient les pages web entre elles.",
+            logo: '#'
+        },
+        {
+            id: 'IA',
+            nom: 'INTELLIGENCE ARTIFICIELLE',
+            description: "L'intelligence artificielle est « l'ensemble des théories et des techniques mises en œuvre en vue de réaliser des machines capables de simuler l'intelligence humaine ». Elle englobe donc un ensemble de concepts et de technologies, plus qu'une discipline autonome constituée.",
+            logo: '#'
+        },
+        {
+            id: 'IOT',
+            nom: 'INTERNET DES OBJETS',
+            description: "L'Internet des objets ou IOT est l'interconnexion entre l'Internet et des objets, des lieux et des environnements physiques. L'appellation désigne un nombre croissant d'objets connectés à Internet permettant ainsi une communication entre nos biens dits physiques et leurs existences numériques.",
+            logo: '#'
+        },
+        {
+            id: 'SECURITE',
+            nom: 'SECURITE INFORMATIQUE',
+            description: "La sécurité des systèmes d’information ou plus simplement sécurité informatique, est l’ensemble des moyens techniques, organisationnels, juridiques et humains nécessaires à la mise en place de moyens visant à empêcher ..",
+            logo: '#'
+        },
+        {
+            id: 'BD',
+            nom: 'BIG DATA',
+            description: "Le big data, les mégadonnées ou les données massives, désigne les ressources d’informations dont les caractéristiques en termes de volume, de vélocité et de variété imposent l’utilisation de technologies et de méthodes analytiques particulières pour générer de la valeur, et qui dépassent en général les ...",
             logo: '#'
         }
     ];
@@ -37,6 +68,7 @@ function AcceuilDashOnglet(){
 
             stateMachines: ['ClubMachine']
         });
+        console.log(riveCanvas)
     }, []);
     return (
         <>
@@ -52,7 +84,7 @@ function AcceuilDashOnglet(){
                     (actualites.length > 0)?
                         actualites.map((value, index, array)=>{
                             return (
-                                <ActualiteItem texte={value.texte} image={value.image} droite={(index%2 != 0)? true : false}/>
+                                <ActualiteItem key={value.id} texte={value.texte} image={value.image} droite={(index%2 != 0)? true : false}/>
                             );
                         })
                     :
@@ -64,7 +96,7 @@ function AcceuilDashOnglet(){
                 {
                     sections.map((value, index, array)=>{
                         return (
-                            <SectionItem nom={value.nom} description={value.description} logo={value.logo}/>
+                            <SectionItem key={value.id} nom={value.nom} description={value.description} logo={value.logo}/>
                         );
                     })
                 }

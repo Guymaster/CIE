@@ -13,6 +13,9 @@ import AcceuilDashOnglet from './pages/dash/onglets/AcceuilDashOnglet';
 import RessourcesOnglet from './pages/dash/onglets/RessourcesOnglet';
 import ProposOnglet from './pages/dash/onglets/ProposIOnglet';
 import ProfilOnglet from './pages/dash/onglets/ProfilOnglet';
+import AcceuilForumOnglet from './pages/forum/onglets/AcceuilForumOnglet';
+import QuestionsOnglet from './pages/forum/onglets/QuestionsOnglet';
+import TopicView from './pages/forum/onglets/TopicView';
 
 function App() {
   return (
@@ -26,9 +29,13 @@ function App() {
               <Route path='propos' element={<ProposOnglet/>}/>
               <Route path='profil' element={<ProfilOnglet/>}/>
             </Route>
-            <Route path='forum' element={<ForumPage/>}/>
-              <Route path='inscription' element={<RegisterPage/>}/>
-              <Route path='connexion' element={<SignInPage/>}/>
+            <Route path='forum' element={<ForumPage/>}>
+              <Route path='' element={<AcceuilForumOnglet/>}/>
+              <Route path='mestopics' element={<QuestionsOnglet/>}/>
+              <Route path='topic' element={<TopicView/>}/>
+            </Route>
+            <Route path='inscription' element={<RegisterPage/>}/>
+            <Route path='connexion' element={<SignInPage/>}/>
         </Routes>
       </BrowserRouter>
     </div>

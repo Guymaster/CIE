@@ -4,13 +4,23 @@ import RessourceItem from "../../components/RessourceItem";
 import '../../../styles/RessourcesOnglet.css';
 
 function RessourcesOnglet(){
+    const [addActive, setAddActive] = useState(true);
     const [ressources, setRessources] = useState([
         {
             titre: 'Les bases du HTML',
             lien: 'https://youtube.com',
             auteurNom: 'Guymaster',
             auteurID: 'KJCJCJ777G',
-            date: '20/03/2022'
+            date: '20/03/2022',
+            type: 'Vidéo'
+        },
+        {
+            titre: 'Les bases du HTML',
+            lien: 'https://youtube.com',
+            auteurNom: 'Guymaster',
+            auteurID: 'KJCJCJ777G',
+            date: '20/03/2022',
+            type: 'Vidéo'
         }
     ]);
     useEffect(()=>{
@@ -24,12 +34,15 @@ function RessourcesOnglet(){
     }, []);
     return (
         <div className="corps">
+            <div className='modifSaveBTN' onClick={()=>{}}>
+                +
+            </div>
             <input type='search' className="searchBar" placeholder="Recherchez avec des Mots-clés"/>
             <div className="resultBox">
             {
                 ressources.map((value, index, array)=>{
                     return (
-                        <RessourceItem titre={value.titre} lien={value.lien} auteurNom={value.auteurNom} auteurID={value.auteurID} date={value.date}/>
+                        <RessourceItem key={index} type={value.type} titre={value.titre} lien={value.lien} auteurNom={value.auteurNom} auteurID={value.auteurID} date={value.date}/>
                     );
                 })
             }

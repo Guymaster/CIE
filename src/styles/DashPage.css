@@ -198,6 +198,23 @@ footer{
     color: #3098F2;
 }
 
+identicon-svg{
+    transition: 0.3s;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    border: none;
+    margin-right: 0px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+identicon-svg:hover{
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: rgba(48, 152, 242, 0.4);
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 950px) {
