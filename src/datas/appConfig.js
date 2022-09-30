@@ -1,12 +1,14 @@
+
+
 const config = {
     firebase: {
-        apiKey: "AIzaSyCesV924U-_lE8913Mstw_8nVor0Q0HYz8",
-        authDomain: "club-info-esatic.firebaseapp.com",
-        projectId: "club-info-esatic",
-        storageBucket: "club-info-esatic.appspot.com",
-        messagingSenderId: "183764526610",
-        appId: "1:183764526610:web:56f62c1f51d4bda1dd1acb",
-        measurementId: "G-P39YPBTQ9Q"
+        apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+        authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+        projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+        storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+        messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+        appId: process.env.REACT_APP_FIREBASE_APP_ID,
+        measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
       }
 }
 export default config;

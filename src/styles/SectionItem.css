@@ -1,0 +1,36 @@
+.sectionItemBox{
+    transition: 0.3s;
+    background-color: #3098F2;
+    border-radius: 20px;
+    width: 300px;
+    height: 400px;
+    padding: 10px;
+    margin: 20px;
+    display: inline-block;
+}
+
+.sectionItemBox:hover{
+    transform: scale(1.05);
+    transition: 0.3s;
+    cursor: pointer;
+    background-color: rgba(48, 152, 242, 0.7);
+}
+
+.sectionItemLogo{
+    background-color: gray;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.sectionItemDesc{
+    color: black;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.sectionItemNom{
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 20px;
+}

@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 import QuestionItem from "../../components/QuestionItem";
 import EditorJS from '@editorjs/editorjs';
 import logoImg from '../../../assets/logoClubInfo.svg';
-
+import { desQueArrive } from "../../../firebase/operations";
+import { addQuestion } from "../../../firebase/operations";
+import { getQuestionAll, getQuestionBySection } from "../../../firebase/operations";
+import { async } from "@firebase/util";
 
 const LinkTool = require('@editorjs/link');
 const CodeTool = require('@editorjs/code');
@@ -12,33 +15,58 @@ const SimpleImage = require('@editorjs/simple-image');
 
 function AcceuilForumOnglet(){
     var editor;
+    const [user, setUser] = useState({});
     const Navigate = useNavigate();
     const [addQuest, setAddQuest] = useState(false);
     const [addQuestTitre, setAddQuestTitre] = useState("");
     const [addQuestDesc, setAddQuestDesc] = useState("");
-    const [addQuestSection, setAddQuestSection] = useState("");
+    const [addQuestSection, setAddQuestSection] = useState("IA");
     const [addQuestTags, setAddQuestTags] = useState([]);
-    const [questions, setQuestions] = useState([
-        {
-            titre: 'COMMENT NE PLUS ETRE BETE', id: 'QUEST001a', auteurNom: 'Guymaster', auteurID: '001', date: '010456', tags: ['avc', 'bepc', 'esatic', 'oeuf', 'tomate', 'salade', 'garba'], section: 'Badding', nbReponses: 23
-        },
-        {
-            titre: 'COMMENT NE PLUS ETRE BETE', id: 'QUEST002', auteurNom: 'Guymaster', auteurID: '001', date: '010456', tags: ['avc', 'bepc', 'esatic'], section: 'Badding', nbReponses: 23
-        }
-    ]);
+    const [questions, setQuestions] = useState([]);
     
     const [selectedSection, setSelectedSection] = useState('TOUT');
+    async function tenterAjouterQuestion(){
+        if(true){
+            let rep = await addQuestion(addQuestTitre, addQuestDesc, addQuestSection, addQuestTags, user.id);
+            if(rep){
+                window.location.reload();
+            }
+            else{
+                alert("Echec de l'ajout de la question");
+            }
+        }
+        else{
+            console.log("Titre", addQuestTitre,"desc", addQuestDesc,"quest", addQuestSection,"tags", addQuestTags)
+            alert("Echec de l'ajout de la question. Remplissez convenablement le formulaire");
+        }
+    }
+    async function actualiserQuestionsByTag(){
+        alert(selectedSection)
+        getQuestionBySection(selectedSection).then((rep)=>{
+            setQuestions(rep);
+        });
+    }
     useEffect(()=>{
         editor = new EditorJS({
-            placeholder: "Ecrivez Ici",
-            holder: 'addQuestDesc',
-            tools: {
-                linkTool: LinkTool,
-                image: SimpleImage,
-                code: CodeTool
-            },
-            minHeight: 40,
-        });
+        placeholder: "Ecrivez Ici",
+        holder: 'addQuestDesc',
+        tools: {
+            linkTool: LinkTool,
+            image: SimpleImage,
+            code: CodeTool
+        },
+        minHeight: 40,
+        onChange: (api, e)=>{
+            api.saver.save().then((v)=>{
+                setAddQuestDesc(v);
+            })
+        }
+    });
+    console.log(editor)
+    getQuestionAll().then((liste)=>{
+        setQuestions(liste);
+    });
+        desQueArrive((userObj)=>{setUser(userObj)});
     }, []);
     return (
         <main className="forumMain">
@@ -49,22 +77,22 @@ function AcceuilForumOnglet(){
                     </div>
                     <label htmlFor="addQuestTitre">Titre de la Question</label>
                     <input type='text' id="addQuestTitre" placeholder="Soyez clair" onChange={(e)=>{setAddQuestTitre(e.target.value)}}/>
-                    <label htmlFor="addQuestDesc" onChange={(e)=>{setAddQuestDesc(e.target.value)}}>Ajoutez une Description</label>
+                    <label htmlFor="addQuestDesc" onChange={(e)=>{setAddQuestDesc(e.target.value);}}>Ajoutez une Description</label>
                     <div id="addQuestDesc"></div>
                     <label htmlFor="addQuestSection" >Sélectionnez une Section</label>
-                    <select onChange={(e)=>{setAddQuestSection(e.target.value)}}>
+                    <select value={addQuestSection} onChange={(e)=>{setAddQuestSection(e.target.value);  console.log("value",e.target.value)}}>
                         <option value="IA">Intelligence Artificielle</option>
-                        <option value="Mobile">Développement Mobile</option>
-                        <option value="Web">Développement Web</option>
+                        <option value="MOBILE">Développement Mobile</option>
+                        <option value="WEB">Développement Web</option>
                         <option value="IOT">IOT/Domotique</option>
-                        <option value="Sécurité">Sécurité</option>
-                        <option value="Big Data">Big Data</option>
+                        <option value="SECU">Sécurité</option>
+                        <option value="BD">Big Data</option>
                     </select>
                     <label htmlFor="addQuestTags">Ajoutez des Mots-clés</label>
                     <input onChange={(e)=>{setAddQuestTags(e.target.value.split(' '))}} type='text' id="addQuestTags" placeholder="Séparez les Tags par des espaces: Ex: html css php"/>
                     <div className="addConfirmRow">
                         <div className="addBoxCancelBTN" onClick={()=>{setAddQuest(false)}}>Annuler</div>
-                        <div className="addBoxConfirmBTN">Confirmer</div>
+                        <div className="addBoxConfirmBTN" onClick={()=>{tenterAjouterQuestion();}}>Confirmer</div>
                     </div>
                 </div>
             </div>
@@ -88,13 +116,13 @@ function AcceuilForumOnglet(){
             <input className="searchTopicInput" type="search" placeholder="Entrez un Mot-clé"/>
             <div className="indication"></div>
             <div className="sectionBox">
-                <div onClick={()=>{setSelectedSection('TOUT')}} className={(selectedSection=='TOUT')?"sectionName sectionNameSelected":"sectionName"}>Tout</div>
-                <div onClick={()=>{setSelectedSection('WEB')}} className={(selectedSection=='WEB')?"sectionName sectionNameSelected":"sectionName"}>Web</div>
-                <div onClick={()=>{setSelectedSection('IA')}} className={(selectedSection=='IA')?"sectionName sectionNameSelected":"sectionName"}>IA</div>
-                <div onClick={()=>{setSelectedSection('IOT')}} className={(selectedSection=='IOT')?"sectionName sectionNameSelected":"sectionName"}>IOT</div>
-                <div onClick={()=>{setSelectedSection('SECU')}} className={(selectedSection=='SECU')?"sectionName sectionNameSelected":"sectionName"}>Sécurité</div>
-                <div onClick={()=>{setSelectedSection('BD')}} className={(selectedSection=='BD')?"sectionName sectionNameSelected":"sectionName"}>Big Data</div>
-                <div onClick={()=>{setSelectedSection('MOBILE')}} className={(selectedSection=='MOBILE')?"sectionName sectionNameSelected":"sectionName"}>Mobile</div>
+                <div onClick={()=>{setSelectedSection('TOUT'); getQuestionAll().then((liste)=>{setQuestions(liste);});}} className={(selectedSection=='TOUT')?"sectionName sectionNameSelected":"sectionName"}>Tout</div>
+                <div onClick={()=>{setSelectedSection('WEB'); actualiserQuestionsByTag();}} className={(selectedSection=='WEB')?"sectionName sectionNameSelected":"sectionName"}>Web</div>
+                <div onClick={()=>{setSelectedSection('IA'); actualiserQuestionsByTag();}} className={(selectedSection=='IA')?"sectionName sectionNameSelected":"sectionName"}>IA</div>
+                <div onClick={()=>{setSelectedSection('IOT'); actualiserQuestionsByTag();}} className={(selectedSection=='IOT')?"sectionName sectionNameSelected":"sectionName"}>IOT</div>
+                <div onClick={()=>{setSelectedSection('SECU'); actualiserQuestionsByTag();}} className={(selectedSection=='SECU')?"sectionName sectionNameSelected":"sectionName"}>Sécurité</div>
+                <div onClick={()=>{setSelectedSection('BD'); actualiserQuestionsByTag();}} className={(selectedSection=='BD')?"sectionName sectionNameSelected":"sectionName"}>Big Data</div>
+                <div onClick={()=>{setSelectedSection('MOBILE'); actualiserQuestionsByTag();}} className={(selectedSection=='MOBILE')?"sectionName sectionNameSelected":"sectionName"}>Mobile</div>
             </div>
             <div className="questionBox">
                 {

@@ -1,0 +1,33 @@
+.actualiteItemBox{
+    margin: 20px auto;
+    max-width: 900px;
+    display: flex;
+    padding: 30px;
+    justify-content: center;
+}
+
+.actualiteItemBody{
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    margin: auto 20px;
+}
+
+.actualiteItemTexte{}
+
+.actualiteItemDate{
+    margin-top: 15px;
+    color: rgba(112, 112, 112, 0.7);
+    font-style: italic;
+}
+
+.actualiteItemDroite{
+    flex-direction: row-reverse;
+}
+
+.actualiteItemImage{
+    background-color: aqua;
+    display: block;
+    height: 100%;
+    width: 50px;
+}

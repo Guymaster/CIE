@@ -1,8 +1,11 @@
 import '../../styles/QuestionItem.css';
+import { useNavigate } from 'react-router-dom';
+import { timeStampToFamiliar } from '../../utils/dateFormat';
 
 export default function QuestionItem({titre, id, nbReponses, date, tags, section}){
+    const Navigate = useNavigate();
     return (<>
-        <div className="questBox">
+        <div className="questBox" onClick={()=>{Navigate('/forum/topic', {questionID: id})}}>
             <div className="questTitre">
                 {titre}
             </div>
@@ -23,7 +26,7 @@ export default function QuestionItem({titre, id, nbReponses, date, tags, section
             </div>
             <div className="questInfoRow">
                 <div className="questRep"> {nbReponses} Réponses </div>
-                <div className="questDate">25/02/2022 - 15H34</div>
+                <div className="questDate"> {timeStampToFamiliar(date)} </div>
             </div>
         </div>
     </>);

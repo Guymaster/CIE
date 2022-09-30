@@ -9,8 +9,8 @@ var riveCanvas;
 
 function AcceuilDashOnglet(){
     const [actualites, setActualites] = useState([
-        {id: '1', texte: 'Blabla bla bla', image: '#', date: '25/02/2022'},
-        {id: '2', texte: 'Blabla bla bla', image: '#', date: '26/02/2023'}
+        {id: '1', texte: 'Blabla bla bla', image: '#', date: Date.now()},
+        {id: '2', texte: 'Blabla bla bla', image: '#', date: Date.now()}
     ]);
     const sections = [
         {
@@ -40,13 +40,13 @@ function AcceuilDashOnglet(){
         {
             id: 'SECURITE',
             nom: 'SECURITE INFORMATIQUE',
-            description: "La sécurité des systèmes d’information ou plus simplement sécurité informatique, est l’ensemble des moyens techniques, organisationnels, juridiques et humains nécessaires à la mise en place de moyens visant à empêcher ..",
+            description: "La sécurité des systèmes d’information ou plus simplement sécurité informatique, est l’ensemble des moyens techniques, organisationnels, juridiques et humains nécessaires à la mise en place de moyens visant à empêcher les attaques informatiques et les fuites de données.",
             logo: '#'
         },
         {
             id: 'BD',
             nom: 'BIG DATA',
-            description: "Le big data, les mégadonnées ou les données massives, désigne les ressources d’informations dont les caractéristiques en termes de volume, de vélocité et de variété imposent l’utilisation de technologies et de méthodes analytiques particulières pour générer de la valeur, et qui dépassent en général les ...",
+            description: "Le big data, les mégadonnées ou les données massives, désigne les ressources d’informations dont les caractéristiques en termes de volume, de vélocité et de variété imposent l’utilisation de technologies et de méthodes analytiques particulières pour générer de la valeur.",
             logo: '#'
         }
     ];
@@ -92,7 +92,7 @@ function AcceuilDashOnglet(){
                 }
             </div>
             <div className="partNom">Découvrez nos Sections</div>
-            <div className="partBox">
+            <div className="partBox sectionBox">
                 {
                     sections.map((value, index, array)=>{
                         return (
