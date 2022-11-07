@@ -3,7 +3,8 @@
     background-color: white;
     position: fixed;
     width: 100%;
-    bottom: -90vh;
+    bottom: -100vh;
+    right: 0px;
     box-shadow: 0px 5px 20px rgba(112, 112, 112, 0.5);
     text-align: start;
     max-height: 90vh;
@@ -11,6 +12,9 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
     opacity: 0;
+    border: solid 1px rgba(112, 112, 112, 0.5);
+    max-width: 500px;
+    padding: 20px 30px;
 }
 
 .writeBoxActive{
@@ -40,25 +44,6 @@
     transition: 0.3s;
 }
 
-.writeBoxCancelBTN:hover{
-    opacity: 0.7;
-    transition: 0.3s;
-    cursor: pointer;
-    background-color: #df5454;
-}
-
-.writeBoxCancelBTN{
-    margin: 30px;
-    border: solid 1px #c22525;
-    background-color: white;
-    width: 100px;
-    padding: 5px 20px;
-    border-radius: 20px;
-    color: rgba(112, 112, 112, 1);
-    text-align: center;
-    font-size: 15px;
-}
-
 .writeBoxConfirmBTN:hover{
     opacity: 0.7;
     transition: 0.3s;
@@ -72,12 +57,24 @@
     border-radius: 20px;
     color: white;
     text-align: center;
-    margin: 30px;
+}
+
+.writeBoxCancelBTN:hover{
+    opacity: 0.7;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.writeBoxCancelBTN{
+    padding: 10px 10px;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
 }
 
 .confirmRow{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 #editorBox{
@@ -85,8 +82,10 @@
 }
 
 .topicEntete{
-    margin: 40px;
+    margin: 40px auto;
     font-size: 25px;
+    max-width: 600px;
+    padding: 20px;
 }
 
 .topicEnteteTitre{
@@ -109,4 +108,39 @@
 
 .logo:hover{
     cursor: pointer;
+}
+
+.writeBoxEntete{
+    display: flex;
+}
+
+.writeBoxEntete svg{
+    height: 30px;
+}
+
+#inputReponseBox{
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* width */
+#inputReponseBox::-webkit-scrollbar {
+    width: 5px;
+}
+  
+  /* Track */
+#inputReponseBox::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+  
+  /* Handle */
+#inputReponseBox::-webkit-scrollbar-thumb {
+    background: rgba(112, 112, 112, 0.5);
+    border-radius: 10px;
+}
+
+.writeBoxEnteteTitre{
+    margin: auto 10px;
+    font-size: 20px;
 }

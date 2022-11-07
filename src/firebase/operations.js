@@ -153,6 +153,7 @@ export async function getQuestionAll(){
         let questionsRef = collection(store, "questions");
         const q = query(questionsRef, orderBy("date", "desc"), limit(20));
         getDocs(q).then((snaps)=>{
+            let i = 1;
             snaps.forEach(async (snap)=>{
                 let obj = {
                     id: snap.id,
@@ -165,8 +166,41 @@ export async function getQuestionAll(){
                     nbReponses: await getNbReponseForQuestion(snap.id)
                 };
                 liste.push(obj);
+                if(i==snaps.size){
+                    console.log('fin');
+                    resolve([ ...liste]);
+                }
+                i++;
             });
-            resolve(liste);
+        })
+    });
+}
+
+export async function getQuestionByAuteur(auteurID){
+    return new Promise(async resolve => {
+        let liste = [];
+        let questionsRef = collection(store, "questions");
+        const q = query(questionsRef, where("auteurID", "==", auteurID), orderBy("date", "desc"));
+        getDocs(q).then((snaps)=>{
+            let i = 1;
+            snaps.forEach(async (snap)=>{
+                let obj = {
+                    id: snap.id,
+                    titre: snap.data().titre,
+                    date: snap.data().date,
+                    description: snap.data().description,
+                    tags: snap.data().tags,
+                    auteurID: snap.data().auteurID,
+                    section: snap.data().section,
+                    nbReponses: await getNbReponseForQuestion(snap.id)
+                };
+                liste.push(obj);
+                if(i==snaps.size){
+                    console.log('fin');
+                    resolve([ ...liste]);
+                }
+                i++;
+            });
         })
     });
 }
@@ -177,6 +211,7 @@ export async function getQuestionAllByTag(tags){
         let questionsRef = collection(store, "questions");
         const q = query(questionsRef, where('tags', 'array-contains-any', tags));
         getDocs(q).then((snaps)=>{
+            let i = 1;
             snaps.forEach(async (snap)=>{
                 let obj = {
                     id: snap.id,
@@ -189,8 +224,12 @@ export async function getQuestionAllByTag(tags){
                     nbReponses: await getNbReponseForQuestion(snap.id)
                 };
                 liste.push(obj);
+                if(i==snaps.size){
+                    console.log('fini', liste)
+                    resolve([...liste]);
+                }
+                i++;
             });
-            resolve(liste);
         })
     });
 }
@@ -201,20 +240,34 @@ export async function getQuestionBySection(section){
         let questionsRef = collection(store, "questions");
         const q = query(questionsRef, where("section", "==", section), orderBy('date', 'desc'));
         getDocs(q).then((snaps)=>{
-            snaps.forEach(async (snap)=>{
-                let obj = {
-                    id: snap.id,
-                    titre: snap.data().titre,
-                    date: snap.data().date,
-                    description: snap.data().description,
-                    tags: snap.data().tags,
-                    auteurID: snap.data().auteurID,
-                    section: snap.data().section,
-                    nbReponses: await getNbReponseForQuestion(snap.id)
-                };
-                liste.push(obj);
-            });
-            resolve(liste);
+            console.log('appzelé')
+            if(snaps.empty){
+                console.log('empty')
+                resolve([...liste])
+            }
+            else{
+                console.log('not empty')
+                let i = 1;
+                snaps.forEach(async (snap)=>{
+                    let obj = {
+                        id: snap.id,
+                        titre: snap.data().titre,
+                        date: snap.data().date,
+                        description: snap.data().description,
+                        tags: snap.data().tags,
+                        auteurID: snap.data().auteurID,
+                        section: snap.data().section,
+                        nbReponses: await getNbReponseForQuestion(snap.id)
+                    };
+                    console.log(section, obj)
+                    liste.push(obj);
+                    if(i==snaps.size){
+                        console.log('fini', liste)
+                        resolve([...liste]);
+                    }
+                    i++;
+                });
+            }
         })
     });
 }

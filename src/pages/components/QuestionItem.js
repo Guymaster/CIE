@@ -1,11 +1,13 @@
 import '../../styles/QuestionItem.css';
-import { useNavigate } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 import { timeStampToFamiliar } from '../../utils/dateFormat';
+import { SupprQuestionContext } from './contextRegistry';
+import { useContext } from 'react';
 
-export default function QuestionItem({titre, id, nbReponses, date, tags, section}){
+export default function QuestionItem({titre, id, nbReponses, date, tags, section, owner, onSupprClick}){
     const Navigate = useNavigate();
     return (<>
-        <div className="questBox" onClick={()=>{Navigate('/forum/topic', {questionID: id})}}>
+        <div className="questBox" onClick={()=>{Navigate('/forum/topic/'+id)}}>
             <div className="questTitre">
                 {titre}
             </div>
@@ -15,9 +17,7 @@ export default function QuestionItem({titre, id, nbReponses, date, tags, section
                     (tags)?
                         tags.map(
                             (value, index, array)=>{
-                                return <>
-                                    <div className="questTag" key={value}> {value} </div>
-                                </>
+                                return (<div className="questTag" key={index}> {value} </div>)
                             }
                         )
                     :
@@ -26,8 +26,14 @@ export default function QuestionItem({titre, id, nbReponses, date, tags, section
             </div>
             <div className="questInfoRow">
                 <div className="questRep"> {nbReponses} Réponses </div>
-                <div className="questDate"> {timeStampToFamiliar(date)} </div>
+                <div className="questDate"> {timeStampToFamiliar(date/1000)} </div>
             </div>
+            {
+                (owner==true)?
+                    <div className='supprItemBTN' onClick={(e)=>{e.stopPropagation(); onSupprClick();}}>Supprimer</div>
+                :
+                    <></>
+            }
         </div>
     </>);
 }

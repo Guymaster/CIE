@@ -1,7 +1,7 @@
 import '../../styles/RessourceItem.css';
 import { identiconSvg } from '../../utils/avatar.js';
 
-export default function RessourceItem({titre, lien, auteurNom, auteurID, date, type}){
+export default function RessourceItem({titre, lien, auteurNom, auteurID, date, type, owner}){
     return (<>
         <a href={lien}>
         <div className="ressourBox">
@@ -16,6 +16,12 @@ export default function RessourceItem({titre, lien, auteurNom, auteurID, date, t
                 <div className="auteurNom">{auteurNom}</div>
                 <div className='auteurProfil'><identicon-svg username={auteurNom}></identicon-svg></div>
             </div>
+            {
+                (owner==true)?
+                    <div className='supprItemBTN' onClick={(e)=>{e.stopPropagation();}}>Supprimer</div>
+                :
+                    <></>
+            }
         </div>
         </a>
     </>);

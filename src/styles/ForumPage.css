@@ -252,3 +252,39 @@
     display: flex;
     justify-content: space-between;
 }
+
+.supprQuestBoxActive{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 14;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+}
+
+.supprQuestBoxNotActive{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 14;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.supprQuestContent{
+    background-color: white;
+    width: 500px;
+    padding: 20px;
+    padding-top: 50px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

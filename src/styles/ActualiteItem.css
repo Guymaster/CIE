@@ -10,7 +10,7 @@
     text-align: start;
     display: flex;
     flex-direction: column;
-    margin: auto 20px;
+    margin: 0px 20px;
 }
 
 .actualiteItemTexte{}
@@ -28,6 +28,14 @@
 .actualiteItemImage{
     background-color: aqua;
     display: block;
-    height: 100%;
-    width: 50px;
+    border-radius: 20px;
+}
+
+@media (max-width: 950px) {
+    .actualiteItemBox{
+        flex-direction: column-reverse;
+    }
+    .actualiteItemImage{
+        margin-bottom: 20px;
+    }
 }

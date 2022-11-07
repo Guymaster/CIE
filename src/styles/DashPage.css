@@ -227,6 +227,13 @@ identicon-svg:hover{
     .miniBarExtend{
         display: block;
     }
+    #riveCanvas{
+        display: none;
+    }
+    .welcomeTexte{
+        margin-right: 20px;
+        font-size: 45px;
+    }
 }
 
 @media (max-width: 700px) {

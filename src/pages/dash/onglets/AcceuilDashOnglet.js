@@ -3,13 +3,15 @@ import {useState} from 'react';
 import '../../../styles/AcceuilDashOnglet.css';
 import ActualiteItem from "../../components/ActualiteItem";
 import SectionItem from "../../components/SectionItem";
+import kerenIMG from '../../../assets/keren.png';
+import logoWeb from '../../../assets/web.png';
 const Rive = require('@rive-app/webgl');
 
 var riveCanvas;
 
 function AcceuilDashOnglet(){
     const [actualites, setActualites] = useState([
-        {id: '1', texte: 'Blabla bla bla', image: '#', date: Date.now()},
+        {id: '1', texte: 'Blabla bla bla eg eg ege  eg e ge g e geg ege g zhr hz rh rhh zrh z hzr hrhz rh z hzhz zhrhzrh rz hrz hzrhrzhrzhzrhzrhrzh rzh rz hz rh zrhzh z hz hzh z', image: kerenIMG, date: Date.now()},
         {id: '2', texte: 'Blabla bla bla', image: '#', date: Date.now()}
     ]);
     const sections = [
@@ -23,7 +25,7 @@ function AcceuilDashOnglet(){
             id: 'WEB',
             nom: 'DEVELOPPEMENT WEB',
             description: "Le World Wide Web, la toile mondiale ou la toile, est un système hypertexte public fonctionnant sur Internet. Le Web permet de consulter, avec un navigateur, des pages accessibles sur des sites. L’image de la toile d’araignée vient des hyperliens qui lient les pages web entre elles.",
-            logo: '#'
+            logo: logoWeb
         },
         {
             id: 'IA',
@@ -84,7 +86,7 @@ function AcceuilDashOnglet(){
                     (actualites.length > 0)?
                         actualites.map((value, index, array)=>{
                             return (
-                                <ActualiteItem key={value.id} texte={value.texte} image={value.image} droite={(index%2 != 0)? true : false}/>
+                                <ActualiteItem key={value.id} texte={value.texte} date={value.date} image={value.image} droite={(index%2 != 0)? true : false}/>
                             );
                         })
                     :

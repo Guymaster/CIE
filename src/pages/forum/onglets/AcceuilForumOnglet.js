@@ -8,6 +8,9 @@ import { desQueArrive } from "../../../firebase/operations";
 import { addQuestion } from "../../../firebase/operations";
 import { getQuestionAll, getQuestionBySection } from "../../../firebase/operations";
 import { async } from "@firebase/util";
+import { useContext } from "react";
+import { UserContext } from "../../components/contextRegistry";
+import { UserContextProvider } from "../../components/contextRegistry";
 
 const LinkTool = require('@editorjs/link');
 const CodeTool = require('@editorjs/code');
@@ -15,16 +18,41 @@ const SimpleImage = require('@editorjs/simple-image');
 
 function AcceuilForumOnglet(){
     var editor;
-    const [user, setUser] = useState({});
+    console.log('render')
+    const {user, setUser} = useContext(UserContext);
     const Navigate = useNavigate();
     const [addQuest, setAddQuest] = useState(false);
+    const [test, setTest] = useState(false);
     const [addQuestTitre, setAddQuestTitre] = useState("");
     const [addQuestDesc, setAddQuestDesc] = useState("");
     const [addQuestSection, setAddQuestSection] = useState("IA");
     const [addQuestTags, setAddQuestTags] = useState([]);
     const [questions, setQuestions] = useState([]);
+    const Sections = {
+        tout: "TOUT",
+        ia: "IA",
+        mobile: "MOBILE",
+        web: "WEB",
+        iot: "IOT",
+        securite: "SECU",
+        bigData: "BD"
+    }
     
-    const [selectedSection, setSelectedSection] = useState('TOUT');
+    const [selectedSection, setSelectedSection] = useState("TOUT");
+    async function fetchData(){
+        if(selectedSection == 'TOUT'){
+            getQuestionAll().then((q)=>{
+                setQuestions(q);
+                console.log('on a fetch:' + selectedSection, q, questions)
+            });
+        }
+        else{
+            getQuestionBySection(selectedSection).then((q)=>{
+                setQuestions(q);
+                console.log('on a fetch:' + selectedSection, q, questions)
+            });
+        }
+    }
     async function tenterAjouterQuestion(){
         if(true){
             let rep = await addQuestion(addQuestTitre, addQuestDesc, addQuestSection, addQuestTags, user.id);
@@ -40,13 +68,8 @@ function AcceuilForumOnglet(){
             alert("Echec de l'ajout de la question. Remplissez convenablement le formulaire");
         }
     }
-    async function actualiserQuestionsByTag(){
-        alert(selectedSection)
-        getQuestionBySection(selectedSection).then((rep)=>{
-            setQuestions(rep);
-        });
-    }
     useEffect(()=>{
+        
         editor = new EditorJS({
         placeholder: "Ecrivez Ici",
         holder: 'addQuestDesc',
@@ -62,12 +85,11 @@ function AcceuilForumOnglet(){
             })
         }
     });
-    console.log(editor)
-    getQuestionAll().then((liste)=>{
-        setQuestions(liste);
-    });
-        desQueArrive((userObj)=>{setUser(userObj)});
+
     }, []);
+    useEffect(()=>{
+        fetchData();
+    }, [selectedSection]);
     return (
         <main className="forumMain">
             <div className={(addQuest)?"addQuestBox addQuestBoxActive":"addQuestBox"}>
@@ -116,19 +138,20 @@ function AcceuilForumOnglet(){
             <input className="searchTopicInput" type="search" placeholder="Entrez un Mot-clé"/>
             <div className="indication"></div>
             <div className="sectionBox">
-                <div onClick={()=>{setSelectedSection('TOUT'); getQuestionAll().then((liste)=>{setQuestions(liste);});}} className={(selectedSection=='TOUT')?"sectionName sectionNameSelected":"sectionName"}>Tout</div>
-                <div onClick={()=>{setSelectedSection('WEB'); actualiserQuestionsByTag();}} className={(selectedSection=='WEB')?"sectionName sectionNameSelected":"sectionName"}>Web</div>
-                <div onClick={()=>{setSelectedSection('IA'); actualiserQuestionsByTag();}} className={(selectedSection=='IA')?"sectionName sectionNameSelected":"sectionName"}>IA</div>
-                <div onClick={()=>{setSelectedSection('IOT'); actualiserQuestionsByTag();}} className={(selectedSection=='IOT')?"sectionName sectionNameSelected":"sectionName"}>IOT</div>
-                <div onClick={()=>{setSelectedSection('SECU'); actualiserQuestionsByTag();}} className={(selectedSection=='SECU')?"sectionName sectionNameSelected":"sectionName"}>Sécurité</div>
-                <div onClick={()=>{setSelectedSection('BD'); actualiserQuestionsByTag();}} className={(selectedSection=='BD')?"sectionName sectionNameSelected":"sectionName"}>Big Data</div>
-                <div onClick={()=>{setSelectedSection('MOBILE'); actualiserQuestionsByTag();}} className={(selectedSection=='MOBILE')?"sectionName sectionNameSelected":"sectionName"}>Mobile</div>
+                <div onClick={()=>{setSelectedSection('TOUT');}} className={(selectedSection=='TOUT')?"sectionName sectionNameSelected":"sectionName"}>Tout</div>
+                <div onClick={()=>{setSelectedSection('WEB');}} className={(selectedSection=='WEB')?"sectionName sectionNameSelected":"sectionName"}>Web</div>
+                <div onClick={()=>{setSelectedSection('IA');}} className={(selectedSection=='IA')?"sectionName sectionNameSelected":"sectionName"}>IA</div>
+                <div onClick={()=>{setSelectedSection('IOT');}} className={(selectedSection=='IOT')?"sectionName sectionNameSelected":"sectionName"}>IOT</div>
+                <div onClick={()=>{setSelectedSection('SECU');}} className={(selectedSection=='SECU')?"sectionName sectionNameSelected":"sectionName"}>Sécurité</div>
+                <div onClick={()=>{setSelectedSection('BD');}} className={(selectedSection=='BD')?"sectionName sectionNameSelected":"sectionName"}>Big Data</div>
+                <div onClick={()=>{setSelectedSection('MOBILE');}} className={(selectedSection=='MOBILE')?"sectionName sectionNameSelected":"sectionName"}>Mobile</div>
             </div>
             <div className="questionBox">
                 {
                     questions.map(
                         (value, index, array)=>{
-                            return <QuestionItem key={value.id} nbReponses={value.nbReponses} id={value.id} tags={value.tags} section={value.section} titre={value.titre}/>
+                            console.log(value)
+                            return <QuestionItem key={value.id} nbReponses={value.nbReponses} id={value.id} tags={value.tags} section={value.section} titre={value.titre} date={value.date}/>
                         }
                     )
                 }

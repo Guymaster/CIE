@@ -13,20 +13,21 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { desQueArrive } from "../../firebase/operations";
 import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../components/contextRegistry";
 
 function DashPage(){
-    const [user, setUser] = useState({});
+    const {user, setUser} = useContext(UserContext);
     useEffect(()=>{
         document.addEventListener('scroll', (ev)=>{onScroll(window.pageYOffset)})
         addListeners();
-        desQueArrive((userObj)=>{setUser(userObj)});
     }, []);
     const navigate = useNavigate();
     function VersTab(tab){
         navigate(tab)
     }    
     return (
-        <>  
+        <>
             <header id='header'>
                 <div id="logo">
                     <img src={logoImg}/>
